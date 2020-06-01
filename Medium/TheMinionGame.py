@@ -11,91 +11,28 @@
 # Sample Ouput
 # Kevin 82011
 
+# https://www.hackerrank.com/challenges/the-minion-game/problem
+
 def minion_game(s):
-    # Convert string to a list
-    s_List = []
-    for x in range(len(s)):
-        s_List.append(s[x])
+    s_score = 0
+    k_score = 0
 
-    def calculate_Stuart(s): 
-        # Pair each consonant with every letters in string
-        distinct_set = getDistinctWords_Con(s_List)
+    for i in range(len(s)):
+        # Kevin gets points
+        if s[i] in 'AEIOU':
+            k_score += (len(s)-i)
         
-        # Count occurence of each distinct words
-        wordScore_Dict = dict() 
-        temp_list = list(distinct_set)
-        for x in temp_list:
-            count = countOccurence(s, x)
-            wordScore_Dict.update({x:count})
+         # Stuart gets points
+        else:
+            s_score += (len(s)-i)
 
-        # Calculate points
-        total_points = 0
-        points_list = list(wordScore_Dict.values())
-        for x in points_list:
-            total_points += x
-
-        return total_points
-            
-    def getDistinctWords_Con(s_List):
-        temp_List = set()
-        # Goes through each character of the string
-        for i in range(len(s)):
-            if (s_List[i] not in 'AEIOU'):
-                # Goes through characters after
-                for x in range(len(s)): 
-                    if (s[i:x+1] == ''): continue
-                    temp_List.add(s[i:x+1])
-
-        return temp_List
-
-    def getDistinctWords_Vow(s_List):
-        temp_List = set()
-        # Goes through each character of the string
-        for i in range(len(s)):
-            if (s_List[i] in 'AEIOU'):
-                # Goes through characters after
-                for x in range(len(s)): 
-                    if (s[i:x+1] == ''): continue
-                    temp_List.add(s[i:x+1])
-
-        return temp_List
-
-    def countOccurence(string, sub_string):
-        count = 0
-        for x in range(0, len(string)):
-            if (string[x: x+len(sub_string)] == sub_string):
-                count += 1
-        return count
-
-    def calculate_Kevin(s): 
-        # Pair each consonant with every letters in string
-        distinct_set = getDistinctWords_Vow(s_List)
-
-        # Count occurence of each distinct words
-        wordScore_Dict = dict() 
-        temp_list = list(distinct_set)
-        for x in temp_list:
-            count = countOccurence(s, x)
-            wordScore_Dict.update({x:count})
-        
-        # Calculate points
-        total_points = 0
-        points_list = list(wordScore_Dict.values())
-        for x in points_list:
-            total_points += x
-
-        return total_points
-
-    a = calculate_Stuart(s)
-    b = calculate_Kevin(s)
-
-    if a > b : print('Stuart', a)
-    elif (b > a): print('Kevin', b)
+    if s_score > k_score: print('Stuart', s_score)
+    elif (k_score > s_score): print('Kevin', k_score)
     else: print('Draw')
 
 if __name__ == '__main__':
     s = input()
     minion_game(s)
     
-   
-    
+
+
