@@ -25,6 +25,7 @@
 # Hexadecimal (capitalized)
 # Binary 
 
+# https://www.hackerrank.com/challenges/alphabet-rangoli/problem?h_r=next-challenge&h_v=zen
 
 
 def print_formatted(n):
